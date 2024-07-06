@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .trashHoverEffect, .checkCircleHoverEffect {
+    transition: ease 300ms;
+  }
+
+  .trashHoverEffect:hover {
+    transform: scale(1.4);
+  }
+
+  .checkCircleHoverEffect:hover {
+    transform: scale(1.2);
+  }
+}
