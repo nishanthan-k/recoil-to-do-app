@@ -1,12 +1,13 @@
 import { useRecoilState } from "recoil";
 import { newToDoAtom, toDoList } from "../store/atoms/todo.atom";
+import { useCallback } from "react";
 
 function AddNewToDo() {
   const [newToDo, setNewToDo] = useRecoilState(newToDoAtom);
   const [toDo, setToDo] = useRecoilState(toDoList);
   console.log('newtodo re-render');
 
-  const handleSetToDo = () => {
+  const handleSetToDo = useCallback(() => {
     const currToDo = {
       task: newToDo,
       id: toDo.length ? toDo[toDo.length - 1].id + 1 : 0,
@@ -14,7 +15,7 @@ function AddNewToDo() {
     }
     setToDo(todo => [...todo, currToDo])
     setNewToDo('')
-  }
+  }, [toDo, newToDo])
 
   return (
     <div className="w-full flex justify-between gap-4 h-fit">
