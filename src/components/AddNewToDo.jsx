@@ -9,10 +9,11 @@ function AddNewToDo() {
   const handleSetToDo = () => {
     const currToDo = {
       task: newToDo,
-      id: toDo.length ? toDo[toDo.length - 1].id : 0,
+      id: toDo.length ? toDo[toDo.length - 1].id + 1 : 0,
       isCompleted: false,
     }
     setToDo(todo => [...todo, currToDo])
+    setNewToDo('')
   }
 
   return (
@@ -27,7 +28,7 @@ function AddNewToDo() {
       />
       <button 
         className="bg-blue-400 hover:bg-sky-600 px-4 py-0.5 rounded-md"
-        onClick={() => handleSetToDo()}
+        onClick={handleSetToDo}
       >
         Add
       </button>
