@@ -8,8 +8,8 @@ export const newToDoAtom = atom({
 export const toDoList = atom({
   key: "toDoList",
   default: [
-    { todo: "one", isCompleted: false },
-    { todo: "two", isCompleted: false },
-    { todo: "three", isCompleted: true },
+    { task: "one", isCompleted: false },
+    { task: "two", isCompleted: false },
+    { task: "three", isCompleted: true },
   ],
 });

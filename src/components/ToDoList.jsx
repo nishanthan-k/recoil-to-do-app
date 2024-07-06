@@ -7,7 +7,7 @@ function ToDoList() {
 
   return (
     <section className='grid grid-cols-1 gap-2 '>
-      {toDos.map((item, i) => <ToDoCard item={item} key={i} />)}
+      {toDos.map((todo, i) => <ToDoCard todo={todo} key={i} />)}
     </section>
   )
 }

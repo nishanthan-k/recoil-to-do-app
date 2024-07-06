@@ -8,7 +8,7 @@ function AddNewToDo() {
 
   const handleSetToDo = () => {
     const currToDo = {
-      todo: newToDo,
+      task: newToDo,
       isCompleted: false,
     }
     setToDo(todo => [...todo, currToDo])

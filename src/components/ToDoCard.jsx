@@ -2,7 +2,8 @@ import { MdOutlineRadioButtonUnchecked, MdOutlineCheckCircleOutline, MdDelete } 
 import PropTypes from 'prop-types';
 
 function ToDoCard(props) {
-  const {item: {todo, isCompleted}} = props;
+  const {todo: {task, isCompleted}} = props;
+  
   return (
     <div className={`grid grid-flow-col place-content-between place-items-center py-4 px-2 border-2 border-purple-700 ${isCompleted && 'line-through'}`}>
       {isCompleted ? 
@@ -10,15 +11,15 @@ function ToDoCard(props) {
         :
         <MdOutlineRadioButtonUnchecked />
       }
-      <p>{todo}</p>
+      <p>{task}</p>
       <MdDelete className="text-xl" />
     </div>
   )
 }
 
 ToDoCard.propTypes = {
-  item: PropTypes.object.isRequired,
-  todo: PropTypes.string.isRequired,
+  todo: PropTypes.object.isRequired,
+  task: PropTypes.string,
 }
 
 export default ToDoCard;
