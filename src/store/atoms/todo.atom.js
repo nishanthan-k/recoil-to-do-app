@@ -8,6 +8,7 @@ export const newToDoAtom = atom({
 export const toDoList = atom({
   key: "toDoList",
   default: [
+    {task: "qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiop", isCompleted: false},
     { task: "one", isCompleted: false },
     { task: "two", isCompleted: false },
     { task: "three", isCompleted: true },
