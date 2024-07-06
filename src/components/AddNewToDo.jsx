@@ -1,14 +1,15 @@
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { newToDoAtom, toDoList } from "../store/atoms/todo.atom";
 
 function AddNewToDo() {
   const [newToDo, setNewToDo] = useRecoilState(newToDoAtom);
-  const setToDo = useSetRecoilState(toDoList);
+  const [toDo, setToDo] = useRecoilState(toDoList);
   console.log('newtodo re-render');
 
   const handleSetToDo = () => {
     const currToDo = {
       task: newToDo,
+      id: toDo.length ? toDo[toDo.length - 1].id : 0,
       isCompleted: false,
     }
     setToDo(todo => [...todo, currToDo])
