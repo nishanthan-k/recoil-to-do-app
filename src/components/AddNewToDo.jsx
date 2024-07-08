@@ -1,11 +1,13 @@
 import { useRecoilState } from "recoil";
 import { newToDoAtom, toDoList } from "../store/atoms/todo.atom";
 import { useCallback } from "react";
+import useSetLocalStorage from "../hooks/useSetLocalStorage";
 
 function AddNewToDo() {
   const [newToDo, setNewToDo] = useRecoilState(newToDoAtom);
   const [toDo, setToDo] = useRecoilState(toDoList);
-  console.log('newtodo re-render');
+  const setLS = useSetLocalStorage();
+  // console.log('newtodo re-render');
 
   const handleSetToDo = useCallback(() => {
     const currToDo = {
@@ -13,9 +15,13 @@ function AddNewToDo() {
       id: toDo.length ? toDo[toDo.length - 1].id + 1 : 0,
       isCompleted: false,
     }
-    setToDo(todo => [...todo, currToDo])
+
+    const updatedToDos = [...toDo, currToDo]
+    setLS('todos', updatedToDos);
+    setToDo(updatedToDos)
+    console.log('updatedToDos', updatedToDos);
     setNewToDo('')
-  }, [toDo, newToDo])
+  }, [toDo, newToDo, setToDo, setNewToDo, setLS])
 
   return (
     <div className="w-full flex justify-between gap-4 h-fit">
@@ -28,7 +34,7 @@ function AddNewToDo() {
         onChange={(e) => setNewToDo(e.target.value)}
       />
       <button
-        className={`bg-blue-400 hover:bg-sky-600 px-6 py-0.5 rounded-md ${!newToDo && `cursor-not-allowed bg-sky-900`}`}
+        className={`bg-blue-400 px-6 py-0.5 rounded-md ${!newToDo ? 'cursor-not-allowed bg-sky-900' : 'hover:bg-sky-600'}`}
         onClick={handleSetToDo}
         disabled={!newToDo}
       >

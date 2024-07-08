@@ -1,15 +1,19 @@
-import { useEffect } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import useSetLocalStorage from "../hooks/useSetLocalStorage";
 import { toDoList } from "../store/atoms/todo.atom";
-import ToDoCard from "./ToDoCard";
 import { sortedToDos } from "../store/selectors/todo.selector";
+import ToDoCard from "./ToDoCard";
 
 function ToDoList() {
-  const setToDos = useSetRecoilState(toDoList);
-  const toDos = useRecoilValue(sortedToDos);
+  const [toDos, setToDos] = useRecoilState(toDoList);
+  const sortedToDo = useRecoilValue(sortedToDos);
+  const setLS = useSetLocalStorage();
 
   const handleDeleteTask = (id) => {
-    setToDos((prev) => prev.filter((todo) => todo.id !== id));
+    const updatedToDos = toDos.filter((todo) => todo.id !== id);
+
+    setToDos(updatedToDos);
+    setLS('todos', updatedToDos);
   };
 
   const handleTaskCheck = (id) => {
@@ -17,10 +21,10 @@ function ToDoList() {
       prev.map((todo) =>
         todo.id === id
           ? { 
-              ...todo,
-              isCompleted: !todo.isCompleted,
-              completedId: !todo.isCompleted ? prev.filter(n => n.completedId).length + 1 : null,
-            }
+            ...todo,
+            isCompleted: !todo.isCompleted,
+            completedId: !todo.isCompleted ? prev.filter(n => n.completedId).length + 1 : null,
+          }
           : todo
       )
     );
@@ -28,7 +32,7 @@ function ToDoList() {
 
   return (
     <section className="grid grid-cols-1 gap-2 ">
-      {toDos?.map((todo, i) => (
+      {sortedToDo?.map((todo, i) => (
         <ToDoCard
           key={i}
           todo={todo}

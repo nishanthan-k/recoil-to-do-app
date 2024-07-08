@@ -25,7 +25,7 @@ function ToDoCard(props) {
         />
       ) : (
         <MdOutlineRadioButtonUnchecked
-          className="cursor-pointer md:text-xl checkCircleHoverEffect"
+          className="cursor-pointer checkCircleHoverEffect"
           onClick={() => handleTaskCheck(id)}
         />
       )}
