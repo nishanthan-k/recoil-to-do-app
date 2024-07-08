@@ -28,8 +28,9 @@ function AddNewToDo() {
         onChange={(e) => setNewToDo(e.target.value)}
       />
       <button
-        className="bg-blue-400 hover:bg-sky-600 px-6 py-0.5 rounded-md"
+        className={`bg-blue-400 hover:bg-sky-600 px-6 py-0.5 rounded-md ${!newToDo && `cursor-not-allowed bg-sky-900`}`}
         onClick={handleSetToDo}
+        disabled={!newToDo}
       >
         Add
       </button>
