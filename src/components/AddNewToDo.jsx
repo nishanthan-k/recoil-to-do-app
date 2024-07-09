@@ -1,13 +1,12 @@
+import { useCallback, useState } from "react";
 import { useRecoilState } from "recoil";
-import { newToDoAtom, toDoList } from "../store/atoms/todo.atom";
-import { useCallback } from "react";
 import useSetLocalStorage from "../hooks/useSetLocalStorage";
+import { toDoList } from "../store/atoms/todo.atom";
 
 function AddNewToDo() {
-  const [newToDo, setNewToDo] = useRecoilState(newToDoAtom);
+  const [newToDo, setNewToDo] = useState('');
   const [toDo, setToDo] = useRecoilState(toDoList);
   const setLS = useSetLocalStorage();
-  // console.log('newtodo re-render');
 
   const handleSetToDo = useCallback(() => {
     const currToDo = {
@@ -19,7 +18,6 @@ function AddNewToDo() {
     const updatedToDos = [...toDo, currToDo]
     setLS('todos', updatedToDos);
     setToDo(updatedToDos)
-    console.log('updatedToDos', updatedToDos);
     setNewToDo('')
   }, [toDo, newToDo, setToDo, setNewToDo, setLS])
 
