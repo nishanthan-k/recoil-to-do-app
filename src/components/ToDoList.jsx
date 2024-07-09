@@ -1,13 +1,16 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilStateLoadable, useRecoilValue } from "recoil";
 import useSetLocalStorage from "../hooks/useSetLocalStorage";
 import { toDoList } from "../store/atoms/todo.atom";
 import { sortedToDos } from "../store/selectors/todo.selector";
 import ToDoCard from "./ToDoCard";
+import Loader from "../global/loader/Loader";
 
 function ToDoList() {
-  const [toDos, setToDos] = useRecoilState(toDoList);
+  const [toDos, setToDos] = useRecoilStateLoadable(toDoList);
   const sortedToDo = useRecoilValue(sortedToDos);
   const setLS = useSetLocalStorage();
+
+  console.log(toDos.state);
 
   const handleDeleteTask = (id) => {
     const updatedToDos = toDos.filter((todo) => todo.id !== id);
@@ -32,7 +35,10 @@ function ToDoList() {
   };
 
   return (
-    <section className="grid grid-cols-1 gap-2 ">
+    {toDos.state === 'loading' ? (
+      <Loader />
+    ) : (
+      <section className="grid grid-cols-1 gap-2 ">
       {sortedToDo?.map((todo, i) => (
         <ToDoCard
           key={i}
@@ -42,6 +48,7 @@ function ToDoList() {
         />
       ))}
     </section>
+    ) }
   );
 }
 
