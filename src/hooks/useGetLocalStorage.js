@@ -1,7 +1,5 @@
 function useGetLocalStorage(key) {
-  return setTimeout(() => {
-    JSON.parse(localStorage.getItem(key)) || [];
-  }, 3000);
+  return JSON.parse(localStorage.getItem(key)) || [];
 }
 
 export default useGetLocalStorage;
