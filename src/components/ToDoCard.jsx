@@ -45,6 +45,8 @@ function ToDoCard(props) {
 ToDoCard.propTypes = {
   todo: PropTypes.object.isRequired,
   task: PropTypes.string,
+  handleDeleteTask: PropTypes.func.isRequired,
+  handleTaskCheck: PropTypes.func.isRequired,  
 };
 
 export default ToDoCard;

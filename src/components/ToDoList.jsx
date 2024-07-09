@@ -17,17 +17,18 @@ function ToDoList() {
   };
 
   const handleTaskCheck = (id) => {
-    setToDos((prev) =>
-      prev.map((todo) =>
-        todo.id === id
-          ? { 
-            ...todo,
-            isCompleted: !todo.isCompleted,
-            completedId: !todo.isCompleted ? prev.filter(n => n.completedId).length + 1 : null,
-          }
-          : todo
-      )
-    );
+    const updatedToDos = toDos.map((todo) =>
+      todo.id === id
+        ? { 
+          ...todo,
+          isCompleted: !todo.isCompleted,
+          completedId: !todo.isCompleted ? toDos.filter(n => n?.completedId).length + 1 : null,
+        }
+        : todo
+    )
+
+    setLS('todos', updatedToDos);
+    setToDos(updatedToDos)
   };
 
   return (

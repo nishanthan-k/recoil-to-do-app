@@ -12,7 +12,6 @@ function App() {
 
   useEffect(() => {
     setToDo((todo) => [...todo, ...lsArr]);
-    console.log('APP');
   }, [setToDo, lsArr]);
 
   return (
