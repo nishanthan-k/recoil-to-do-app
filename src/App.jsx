@@ -11,8 +11,8 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-      setToDo(lsArr);
-      setLoading(false);
+    setToDo(lsArr);
+    setLoading(false);
   }, [setToDo, lsArr]);
 
   return (

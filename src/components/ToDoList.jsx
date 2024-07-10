@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useRecoilStateLoadable, useRecoilValue } from "recoil";
 import useSetLocalStorage from "../hooks/useSetLocalStorage";
 import { toDoList } from "../store/atoms/todo.atom";
@@ -22,12 +23,12 @@ function ToDoList({ loading }) {
     const updatedToDos = toDosLoadable.contents.map((todo) =>
       todo.id === id
         ? {
-            ...todo,
-            isCompleted: !todo.isCompleted,
-            completedId: !todo.isCompleted
-              ? toDosLoadable.contents.filter((n) => n?.completedId).length + 1
-              : null,
-          }
+          ...todo,
+          isCompleted: !todo.isCompleted,
+          completedId: !todo.isCompleted
+            ? toDosLoadable.contents.filter((n) => n?.completedId).length + 1
+            : null,
+        }
         : todo
     );
 
@@ -56,3 +57,7 @@ function ToDoList({ loading }) {
 }
 
 export default ToDoList;
+
+ToDoList.propTypes = {
+  loading: PropTypes.bool.isRequired, 
+}
